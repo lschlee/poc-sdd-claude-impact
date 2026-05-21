@@ -9,7 +9,12 @@ description: "Task list template for feature implementation"
 
 **Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
 
-**Tests**: The examples below include test tasks. Tests are OPTIONAL - only include them if explicitly requested in the feature specification.
+**Tests**: Per the project constitution (`.specify/memory/constitution.md`,
+Principle I — Test-Driven Development, NON-NEGOTIABLE), test tasks are
+MANDATORY for every user story in this project. For each story, at least
+one failing-test task MUST precede every implementation task, and at
+least one end-to-end / full-stack integration test task MUST be present
+to validate the vertical slice (Principle II).
 
 **Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
 
@@ -80,9 +85,12 @@ Examples of foundational tasks (adjust based on your project):
 
 **Independent Test**: [How to verify this story works on its own]
 
-### Tests for User Story 1 (OPTIONAL - only if tests requested) ⚠️
+### Tests for User Story 1 (MANDATORY — constitution Principle I) ⚠️
 
-> **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
+> **NOTE: Write these tests FIRST, run them, observe them FAIL for the
+> right reason, and only then start the implementation tasks below.**
+> At least one of these tests MUST be an end-to-end / full-stack test
+> that exercises every layer the slice traverses (Principle II).
 
 - [ ] T010 [P] [US1] Contract test for [endpoint] in tests/contract/test_[name].py
 - [ ] T011 [P] [US1] Integration test for [user journey] in tests/integration/test_[name].py
@@ -106,7 +114,10 @@ Examples of foundational tasks (adjust based on your project):
 
 **Independent Test**: [How to verify this story works on its own]
 
-### Tests for User Story 2 (OPTIONAL - only if tests requested) ⚠️
+### Tests for User Story 2 (MANDATORY — constitution Principle I) ⚠️
+
+> Write these tests FIRST, observe failure, then implement. Include at
+> least one end-to-end / full-stack test covering the slice (Principle II).
 
 - [ ] T018 [P] [US2] Contract test for [endpoint] in tests/contract/test_[name].py
 - [ ] T019 [P] [US2] Integration test for [user journey] in tests/integration/test_[name].py
@@ -128,7 +139,10 @@ Examples of foundational tasks (adjust based on your project):
 
 **Independent Test**: [How to verify this story works on its own]
 
-### Tests for User Story 3 (OPTIONAL - only if tests requested) ⚠️
+### Tests for User Story 3 (MANDATORY — constitution Principle I) ⚠️
+
+> Write these tests FIRST, observe failure, then implement. Include at
+> least one end-to-end / full-stack test covering the slice (Principle II).
 
 - [ ] T024 [P] [US3] Contract test for [endpoint] in tests/contract/test_[name].py
 - [ ] T025 [P] [US3] Integration test for [user journey] in tests/integration/test_[name].py
@@ -179,11 +193,15 @@ Examples of foundational tasks (adjust based on your project):
 
 ### Within Each User Story
 
-- Tests (if included) MUST be written and FAIL before implementation
+- Tests MUST be written and observed to FAIL before any implementation
+  task starts (constitution Principle I — non-negotiable)
+- At least one of those tests MUST exercise the full vertical slice
+  end-to-end (constitution Principle II)
 - Models before services
 - Services before endpoints
 - Core implementation before integration
-- Story complete before moving to next priority
+- Story complete (slice demonstrable end-to-end) before moving to next
+  priority
 
 ### Parallel Opportunities
 
@@ -199,7 +217,7 @@ Examples of foundational tasks (adjust based on your project):
 ## Parallel Example: User Story 1
 
 ```bash
-# Launch all tests for User Story 1 together (if tests requested):
+# Launch all tests for User Story 1 together (tests are mandatory in this project):
 Task: "Contract test for [endpoint] in tests/contract/test_[name].py"
 Task: "Integration test for [user journey] in tests/integration/test_[name].py"
 

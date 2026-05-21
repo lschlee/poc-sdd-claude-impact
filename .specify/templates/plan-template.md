@@ -40,7 +40,38 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+The gates below are derived from `.specify/memory/constitution.md` v1.0.0.
+Address each one explicitly. Any "No" answer MUST be either resolved or
+recorded in the Complexity Tracking table with a justification.
+
+- **Principle I — Test-Driven Development (NON-NEGOTIABLE)**
+  - [ ] For each user story in scope, the plan identifies the failing test
+        (or tests) that will be authored first and what behavior they
+        validate.
+  - [ ] The chosen test framework and runner support a fast local
+        Red → Green → Refactor cycle (no required shared infrastructure
+        to run the suite).
+  - [ ] No production code path in this plan is introduced without a
+        corresponding test path.
+
+- **Principle II — Vertical Slice Delivery (NON-NEGOTIABLE)**
+  - [ ] Each user story is a vertical slice: the plan lists every layer
+        the slice traverses (entry point → application → domain →
+        persistence/integration) and the slice can be demonstrated end-
+        to-end.
+  - [ ] Each slice has at least one end-to-end / full-stack integration
+        test scoped to it.
+  - [ ] No purely horizontal increment (schema-only, UI-shell-only, etc.)
+        is treated as a deliverable; if one is required as a step, it is
+        called out as internal scaffolding inside a slice.
+  - [ ] Slices are sized so they can be merged (and, where applicable,
+        released) independently of one another.
+
+- **Development Constraints**
+  - [ ] No `NEEDS CLARIFICATION` markers remain on anything this plan's
+        slices depend on.
+  - [ ] No tests are planned to be skipped or commented out; any
+        exceptions are linked to a tracking issue.
 
 ## Project Structure
 
