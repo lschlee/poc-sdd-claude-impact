@@ -1,0 +1,10 @@
+# Claude Code skills (local tooling, not project artifacts)
+.claude/skills/
+
+# Spec-kit setup and config files
+.specify/extensions.yml
+.specify/extensions/
+.specify/init-options.json
+.specify/workflows/
+.specify/integrations/
+.specify/integration.json
