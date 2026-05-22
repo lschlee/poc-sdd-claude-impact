@@ -12,7 +12,8 @@
     "neverVisited": "Nunca visitada",
     "riskScore": "Risco: {score}",
     "lastVisit": "Última visita: {date}",
-    "topFactors": "Principais fatores:"
+    "topFactors": "Principais fatores:",
+    "registerVisit": "Registrar visita"
   },
   "map": {
     "title": "Mapa de Famílias",
@@ -50,5 +51,18 @@
       "elderly": "Idoso"
     },
     "pregnant": "Gestante"
+  },
+  "chronicCondition": {
+    "diabetes": "diabetes",
+    "hypertension": "hipertensão",
+    "heart_disease": "doença cardíaca",
+    "arthritis": "artrite",
+    "asthma": "asma"
+  },
+  "followUpFlag": {
+    "blood_pressure_not_measured": "Pressão arterial não aferida",
+    "referral_needed": "Encaminhamento necessário",
+    "medication_review_needed": "Revisão de medicação necessária",
+    "follow_up_scheduled": "Retorno agendado"
   }
 }

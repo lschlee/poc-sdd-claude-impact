@@ -19,6 +19,7 @@ const FOLLOW_UP_OPTIONS: FollowUpFlag[] = [
 
 export function VisitForm({ familyId: _familyId, onSubmit, onCancel }: VisitFormProps) {
   const t = useTranslations('visitForm');
+  const tFlag = useTranslations('followUpFlag');
   const today = new Date().toISOString().slice(0, 10);
 
   const [visitDate, setVisitDate] = useState(today);
@@ -96,7 +97,7 @@ export function VisitForm({ familyId: _familyId, onSubmit, onCancel }: VisitForm
               checked={followUpFlags.includes(flag)}
               onChange={e => handleFlagChange(flag, e.target.checked)}
             />
-            {flag.replace(/_/g, ' ')}
+            {tFlag(flag as Parameters<typeof tFlag>[0])}
           </label>
         ))}
       </div>

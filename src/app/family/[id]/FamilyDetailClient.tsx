@@ -69,7 +69,10 @@ export function FamilyDetailClient({ familyId }: { familyId: string }) {
             <li key={r.id}>
               {t(`common.ageGroup.${r.ageGroup}`)}
               {r.isPregnant && ` — ${t('common.pregnant')}`}
-              {r.chronicConditions.length > 0 && ` (${r.chronicConditions.join(', ')})`}
+              {r.chronicConditions.length > 0 &&
+                ` (${r.chronicConditions
+                  .map(c => t(`chronicCondition.${c}` as Parameters<typeof t>[0]))
+                  .join(', ')})`}
             </li>
           ))}
         </ul>

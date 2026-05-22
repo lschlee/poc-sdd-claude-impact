@@ -14,8 +14,8 @@ export default defineConfig({
   },
   projects: [
     {
-      name: 'firefox',
-      use: { ...devices['Pixel 5'], browserName: 'firefox' },
+      name: 'chromium',
+      use: { ...devices['Pixel 5'] },
     },
   ],
   webServer: {

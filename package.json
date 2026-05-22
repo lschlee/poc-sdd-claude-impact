@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "test": "jest",
-    "test:e2e": "playwright test",
-    "test:all": "jest && playwright test",
+    "test:e2e": "LD_LIBRARY_PATH=\"$HOME/.cache/ms-playwright/firefox-1522/firefox:$LD_LIBRARY_PATH\" playwright test",
+    "test:all": "jest && LD_LIBRARY_PATH=\"$HOME/.cache/ms-playwright/firefox-1522/firefox:$LD_LIBRARY_PATH\" playwright test",
     "type-check": "tsc --noEmit",
     "lint": "eslint src",
     "tiles:download": "bash scripts/download-tiles.sh"

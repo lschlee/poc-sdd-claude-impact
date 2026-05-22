@@ -86,6 +86,20 @@ body {
 
 .risk-factors li { font-size: 0.78rem; color: #555; padding: 1px 0; }
 
+.register-visit-link {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  background: #3498db;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.register-visit-link:hover { background: #2980b9; }
+
 .no-coords-notice {
   position: absolute;
   bottom: 8px;
@@ -104,3 +118,176 @@ body {
   .queue-list-panel { flex: none; max-height: 50vh; }
   .queue-map-panel { flex: none; height: 300px; }
 }
+
+/* ---------- Family detail page ---------- */
+
+.family-detail-page {
+  padding: 16px;
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.family-detail-page nav a {
+  color: #3498db;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.family-detail-page nav a:hover { text-decoration: underline; }
+
+.family-detail-page h1 {
+  font-size: 1.6rem;
+  color: #2c3e50;
+}
+
+.family-detail-page h2 {
+  font-size: 1.05rem;
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+.residents-section,
+.visit-form-section,
+.visit-history-section {
+  background: #fff;
+  border: 1px solid #e1e4e8;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.residents-section ul,
+.visit-history-section ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.residents-section li,
+.visit-history-section li {
+  font-size: 0.9rem;
+  color: #444;
+  padding: 4px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.residents-section li:last-child,
+.visit-history-section li:last-child {
+  border-bottom: none;
+}
+
+/* ---------- Visit form ---------- */
+
+.visit-form h3 {
+  font-size: 1.05rem;
+  color: #2c3e50;
+  margin-bottom: 12px;
+}
+
+.visit-form .form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.visit-form label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.visit-form input[type='date'],
+.visit-form textarea {
+  font: inherit;
+  padding: 8px 10px;
+  border: 1px solid #ccd0d4;
+  border-radius: 4px;
+  background: #fff;
+  color: #222;
+  width: 100%;
+  max-width: 320px;
+}
+
+.visit-form textarea {
+  max-width: 100%;
+  resize: vertical;
+  min-height: 72px;
+}
+
+.visit-form input:focus,
+.visit-form textarea:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px #3498db40;
+}
+
+.visit-form .checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: #333;
+  cursor: pointer;
+  padding: 2px 0;
+}
+
+.visit-form .checkbox-label input[type='checkbox'] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.visit-form .form-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.visit-form .field-error {
+  color: #c0392b;
+  font-size: 0.8rem;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn-primary,
+.btn-secondary,
+.btn-danger {
+  font: inherit;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.btn-primary {
+  background: #3498db;
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) { background: #2980b9; }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.btn-secondary {
+  background: #fff;
+  color: #333;
+  border-color: #ccd0d4;
+}
+
+.btn-secondary:hover { background: #f5f5f5; }
+
+.btn-danger {
+  background: #fff;
+  color: #c0392b;
+  border-color: #c0392b;
+  margin-bottom: 10px;
+}
+
+.btn-danger:hover { background: #c0392b; color: #fff; }
