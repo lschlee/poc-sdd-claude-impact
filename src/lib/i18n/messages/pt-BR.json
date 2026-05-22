@@ -1,0 +1,54 @@
+{
+  "riskFactor": {
+    "timeSinceVisit": "{days} dias sem visita",
+    "chronicConditions": "{count} condição(ões) crônica(s)",
+    "vulnerableGroups": "{count} residente(s) vulnerável(eis)",
+    "followUp": "Retorno pendente"
+  },
+  "queue": {
+    "title": "Fila de Visitas",
+    "emptyState": "Nenhuma família para visitar hoje",
+    "needsLocation": "Localização pendente",
+    "neverVisited": "Nunca visitada",
+    "riskScore": "Risco: {score}",
+    "lastVisit": "Última visita: {date}",
+    "topFactors": "Principais fatores:"
+  },
+  "map": {
+    "title": "Mapa de Famílias",
+    "noCoordinates": "Sem coordenadas"
+  },
+  "visitForm": {
+    "title": "Registrar Visita",
+    "dateLabel": "Data da visita",
+    "notesLabel": "Observações",
+    "followUpLabel": "Ações de acompanhamento",
+    "submitButton": "Registrar",
+    "cancelButton": "Cancelar",
+    "undoButton": "Desfazer última visita",
+    "futureDateError": "A data da visita não pode ser no futuro",
+    "invalidDateError": "Data inválida",
+    "successMessage": "Visita registrada com sucesso"
+  },
+  "familyDetail": {
+    "title": "Detalhes da Família",
+    "residents": "Residentes",
+    "visitHistory": "Histórico de visitas",
+    "noVisits": "Nenhuma visita registrada",
+    "visitDate": "Data: {date}",
+    "visitNotes": "Observações: {notes}",
+    "visitUndone": "(desfeito)",
+    "backToQueue": "Voltar à fila"
+  },
+  "common": {
+    "loading": "Carregando...",
+    "error": "Erro ao carregar dados",
+    "ageGroup": {
+      "infant": "Bebê",
+      "child": "Criança",
+      "adult": "Adulto",
+      "elderly": "Idoso"
+    },
+    "pregnant": "Gestante"
+  }
+}
