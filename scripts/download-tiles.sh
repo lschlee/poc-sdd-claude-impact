@@ -6,7 +6,7 @@
 set -euo pipefail
 
 # Bounding box: south,west,north,east (decimal degrees)
-BBOX="${BBOX:-"-23.5600,-46.6400,-23.5400,-46.6100"}"
+BBOX="${BBOX:-"-22.960,-43.200,-22.945,-43.180"}"
 MIN_ZOOM="${MIN_ZOOM:-14}"
 MAX_ZOOM="${MAX_ZOOM:-17}"
 OUTPUT_DIR="${OUTPUT_DIR:-"public/tiles"}"

@@ -21,7 +21,7 @@ interface QueueMapProps {
   onSelect: (id: string) => void;
 }
 
-const DEFAULT_CENTER: [number, number] = [-23.550, -46.625];
+const DEFAULT_CENTER: [number, number] = [-22.9525, -43.190];
 const DEFAULT_ZOOM = 15;
 
 export function QueueMap({ families, selectedId, onSelect }: QueueMapProps) {
