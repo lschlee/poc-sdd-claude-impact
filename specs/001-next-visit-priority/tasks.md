@@ -122,11 +122,11 @@ Single Next.js project — `src/` and `tests/` at repository root, `public/` for
 
 **Purpose**: Edge cases, type safety, build validation, and developer workflow verification.
 
-- [ ] T035a [P] Write failing Jest/RTL unit test in `tests/unit/familyCard.test.ts`: render `<FamilyCard>` with `lastVisitDate: null` and assert the pt-BR "nunca visitada" label is present; render with a non-null date and assert the label is absent — test must fail before T035 exists (constitution Principle I)
-- [ ] T035 Handle the never-visited family edge case in `src/components/VisitQueue/FamilyCard.tsx`: display a pt-BR "nunca visitada" label when `lastVisitDate === null` instead of a negative days value (spec edge cases) — makes T035a green
-- [ ] T038 [P] Run `pnpm type-check` (`tsc --noEmit`) and fix all TypeScript type errors across `src/` and `tests/`
-- [ ] T039 [P] Run `pnpm lint` and fix all ESLint warnings and errors across `src/`
-- [ ] T040 Run `pnpm build` to verify Next.js static export produces a valid `out/` directory; confirm no server-side import leaks (Leaflet window access, dynamic imports) break the build
+- [X] T035a [P] Write failing Jest/RTL unit test in `tests/unit/familyCard.test.ts`: render `<FamilyCard>` with `lastVisitDate: null` and assert the pt-BR "nunca visitada" label is present; render with a non-null date and assert the label is absent — test must fail before T035 exists (constitution Principle I)
+- [X] T035 Handle the never-visited family edge case in `src/components/VisitQueue/FamilyCard.tsx`: display a pt-BR "nunca visitada" label when `lastVisitDate === null` instead of a negative days value (spec edge cases) — makes T035a green
+- [X] T038 [P] Run `pnpm type-check` (`tsc --noEmit`) and fix all TypeScript type errors across `src/` and `tests/`
+- [X] T039 [P] Run `pnpm lint` and fix all ESLint warnings and errors across `src/`
+- [X] T040 Run `pnpm build` to verify Next.js static export produces a valid `out/` directory; confirm no server-side import leaks (Leaflet window access, dynamic imports) break the build
 - [ ] T041 Validate the full quickstart.md developer workflow end-to-end: `pnpm install` → `pnpm dev` → `pnpm test` (all green) → `pnpm test:e2e` (all green) → `pnpm build`; fix any deviation from the documented flow
 
 ---

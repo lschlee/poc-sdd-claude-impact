@@ -13,7 +13,7 @@ const QueueMap = dynamic(() => import('@/components/VisitQueue/QueueMap').then(m
 
 export default function HomePage() {
   const t = useTranslations();
-  const { families, selectedId, select, refresh } = useVisitQueue();
+  const { families, selectedId, select } = useVisitQueue();
 
   return (
     <main className="home-page">
