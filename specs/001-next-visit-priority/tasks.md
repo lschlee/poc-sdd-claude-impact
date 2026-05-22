@@ -102,8 +102,8 @@ Single Next.js project — `src/` and `tests/` at repository root, `public/` for
 > Write these tests FIRST, observe failure, then implement.
 > T027 is the required end-to-end test that exercises every layer of the US2 slice (Principle II).
 
-- [ ] T027 [P] [US2] Write failing Playwright E2E test in `tests/e2e/story2-visit.spec.ts`: from the home queue, tap the top family, fill and submit the visit form, assert the queue reorders with the next family at top, assert the registered family's detail page shows the new visit in history, tap undo and assert queue restores; also assert that entering a future date in the visit form shows a pt-BR validation error and blocks submission (FR-005, data-model.md validation rule) — test must fail before any implementation exists
-- [ ] T028 [P] [US2] Write failing Jest integration test in `tests/integration/visitRepository.test.ts` using `fake-indexeddb`: `saveVisit` writes a `VisitRecord` and a matching `AuditEntry` in the same transaction; `getActiveVisitsForFamily` excludes records with `undone === true`; `undoVisit` sets `undone = true` and appends an `'undo'` audit entry atomically — test must fail before implementation
+- [X] T027 [P] [US2] Write failing Playwright E2E test in `tests/e2e/story2-visit.spec.ts`: from the home queue, tap the top family, fill and submit the visit form, assert the queue reorders with the next family at top, assert the registered family's detail page shows the new visit in history, tap undo and assert queue restores; also assert that entering a future date in the visit form shows a pt-BR validation error and blocks submission (FR-005, data-model.md validation rule) — test must fail before any implementation exists
+- [X] T028 [P] [US2] Write failing Jest integration test in `tests/integration/visitRepository.test.ts` using `fake-indexeddb`: `saveVisit` writes a `VisitRecord` and a matching `AuditEntry` in the same transaction; `getActiveVisitsForFamily` excludes records with `undone === true`; `undoVisit` sets `undone = true` and appends an `'undo'` audit entry atomically — test must fail before implementation
 
 ### Implementation for User Story 2
 
