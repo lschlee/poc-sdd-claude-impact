@@ -29,14 +29,14 @@ Single Next.js project — `src/` and `tests/` at repository root, `public/` for
 
 **Purpose**: Initialize the Next.js project, install all dependencies, and configure all tooling so that `pnpm test` and `pnpm test:e2e` can run (even if all tests fail).
 
-- [ ] T001 Initialize Next.js 14 App Router project with TypeScript 5.x strict mode and `output: 'export'` in `next.config.js`; configure `tsconfig.json` with path aliases for `src/`
-- [ ] T002 Install all project dependencies in `package.json`: `next@14`, `react-leaflet@4`, `leaflet@1`, `idb@8`, `next-intl@3` (runtime); `jest`, `ts-jest`, `@testing-library/react`, `@testing-library/jest-dom`, `fake-indexeddb`, `playwright` (dev)
-- [ ] T003 [P] Configure Jest with ts-jest preset, moduleNameMapper for CSS/Leaflet assets, fake-indexeddb setup in `jest.config.ts` + `jest.setup.ts`
-- [ ] T004 [P] Configure Playwright in `playwright.config.ts` with Chromium browser, webServer pointing to `pnpm dev` on port 3000, and mobile viewport (375 × 812)
-- [ ] T005 [P] Configure ESLint in `.eslintrc.json` with `next/core-web-vitals` and `@typescript-eslint/recommended` rules
-- [ ] T006 [P] Scaffold all source and test directories: `src/app/family/[id]/`, `src/components/VisitQueue/`, `src/components/VisitForm/`, `src/domain/`, `src/lib/storage/`, `src/lib/hooks/`, `src/lib/services/`, `src/lib/i18n/messages/`, `src/data/`, `tests/e2e/`, `tests/integration/`, `tests/unit/`, `scripts/`, `public/tiles/14/`
-- [ ] T007 [P] Create tile download script at `scripts/download-tiles.sh` with configurable `BBOX` and zoom 14–17 defaults; commit a minimal stub tile PNG at `public/tiles/14/8399/9633.png` for CI/dev rendering without running the download script
-- [ ] T008 Wire all pnpm scripts in `package.json`: `dev` (`next dev`), `build` (`next build`), `test` (`jest`), `test:e2e` (`playwright test`), `test:all` (Playwright with auto-started dev server), `type-check` (`tsc --noEmit`), `lint` (`eslint src`), `tiles:download` (`bash scripts/download-tiles.sh`)
+- [X] T001 Initialize Next.js 14 App Router project with TypeScript 5.x strict mode and `output: 'export'` in `next.config.js`; configure `tsconfig.json` with path aliases for `src/`
+- [X] T002 Install all project dependencies in `package.json`: `next@14`, `react-leaflet@4`, `leaflet@1`, `idb@8`, `next-intl@3` (runtime); `jest`, `ts-jest`, `@testing-library/react`, `@testing-library/jest-dom`, `fake-indexeddb`, `playwright` (dev)
+- [X] T003 [P] Configure Jest with ts-jest preset, moduleNameMapper for CSS/Leaflet assets, fake-indexeddb setup in `jest.config.ts` + `jest.setup.ts`
+- [X] T004 [P] Configure Playwright in `playwright.config.ts` with Chromium browser, webServer pointing to `pnpm dev` on port 3000, and mobile viewport (375 × 812)
+- [X] T005 [P] Configure ESLint in `.eslintrc.json` with `next/core-web-vitals` and `@typescript-eslint/recommended` rules
+- [X] T006 [P] Scaffold all source and test directories: `src/app/family/[id]/`, `src/components/VisitQueue/`, `src/components/VisitForm/`, `src/domain/`, `src/lib/storage/`, `src/lib/hooks/`, `src/lib/services/`, `src/lib/i18n/messages/`, `src/data/`, `tests/e2e/`, `tests/integration/`, `tests/unit/`, `scripts/`, `public/tiles/14/`
+- [X] T007 [P] Create tile download script at `scripts/download-tiles.sh` with configurable `BBOX` and zoom 14–17 defaults; commit a minimal stub tile PNG at `public/tiles/14/8399/9633.png` for CI/dev rendering without running the download script
+- [X] T008 Wire all pnpm scripts in `package.json`: `dev` (`next dev`), `build` (`next build`), `test` (`jest`), `test:e2e` (`playwright test`), `test:all` (Playwright with auto-started dev server), `type-check` (`tsc --noEmit`), `lint` (`eslint src`), `tiles:download` (`bash scripts/download-tiles.sh`)
 
 ---
 

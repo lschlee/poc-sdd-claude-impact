@@ -1,5 +1,6 @@
-# Claude Code skills (local tooling, not project artifacts)
+# Claude Code skills and worktrees (local tooling, not project artifacts)
 .claude/skills/
+.claude/worktrees/
 
 # Spec-kit setup and config files
 .specify/extensions.yml
@@ -8,3 +9,32 @@
 .specify/workflows/
 .specify/integrations/
 .specify/integration.json
+
+# Node.js / Next.js
+node_modules/
+.next/
+out/
+dist/
+build/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+.env
+.env.local
+.env.*.local
+.pnpm-store/
+
+# Testing
+coverage/
+playwright-report/
+test-results/
+
+# OS
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+
+# Editor
+.vscode/
+.idea/
