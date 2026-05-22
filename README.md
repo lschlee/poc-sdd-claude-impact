@@ -6,6 +6,8 @@ No Brasil, cada ACS acompanha dezenas de famílias em sua micro-área. Decidir *
 
 > **Atenção:** este repositório não contém dados reais. Todas as famílias, moradores, endereços e visitas são fictícios e foram gerados exclusivamente para fins de demonstração.
 
+![Demo do app](public/poc-claude-impact-lab.gif)
+
 ---
 
 ## O que faz
