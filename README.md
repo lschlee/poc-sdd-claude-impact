@@ -1,8 +1,10 @@
 # Próxima Visita — Fila de Prioridade para ACS
 
-> POC de apoio à decisão para Agentes Comunitários de Saúde (ACS) na Atenção Primária à Saúde (ESF).
+> POC desenvolvido para o **Claude Impact Lab** — demonstração de como IA pode apoiar decisões em saúde pública com dados 100% mockados.
 
-No Brasil, cada ACS acompanha dezenas de famílias em sua micro-área. Decidir **quem visitar primeiro** costuma depender de memória, papel e intuição. Este aplicativo substitui esse processo por uma fila ordenada por risco calculado — com os motivos explícitos para cada posição.
+No Brasil, cada ACS acompanha dezenas de famílias em sua micro-área. Decidir **quem visitar primeiro** costuma depender de memória, papel e intuição. Este aplicativo demonstra como seria uma fila ordenada por risco calculado — com os motivos explícitos para cada posição.
+
+> **Atenção:** este repositório não contém dados reais. Todas as famílias, moradores, endereços e visitas são fictícios e foram gerados exclusivamente para fins de demonstração.
 
 ---
 
