@@ -54,7 +54,7 @@ export function VisitForm({ familyId: _familyId, onSubmit, onCancel }: VisitForm
   };
 
   return (
-    <form data-testid="visit-form" onSubmit={handleSubmit} className="visit-form">
+    <form data-testid="visit-form" onSubmit={handleSubmit} className="visit-form" noValidate>
       <h3>{t('title')}</h3>
 
       <div className="form-field">
