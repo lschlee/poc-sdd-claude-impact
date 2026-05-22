@@ -16,6 +16,7 @@ export interface RiskFactor {
   weight: number;
   contribution: number;
   labelKey: string;
+  labelValues?: Record<string, number | string>;
 }
 
 export interface RiskScore {

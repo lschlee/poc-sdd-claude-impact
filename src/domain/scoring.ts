@@ -72,6 +72,7 @@ export function computeRiskScore(
       weight: weights.timeSinceVisit,
       contribution: f_time * weights.timeSinceVisit,
       labelKey: 'riskFactor.timeSinceVisit',
+      labelValues: { days: daysSince === Infinity ? constants.neverVisitedCap : daysSince } as Record<string, number | string>,
     },
     {
       key: 'chronic_conditions' as const,
@@ -79,6 +80,7 @@ export function computeRiskScore(
       weight: weights.chronicConditions,
       contribution: f_chronic * weights.chronicConditions,
       labelKey: 'riskFactor.chronicConditions',
+      labelValues: { count: totalConditions } as Record<string, number | string>,
     },
     {
       key: 'vulnerable_groups' as const,
@@ -86,6 +88,7 @@ export function computeRiskScore(
       weight: weights.vulnerableGroups,
       contribution: f_vulnerable * weights.vulnerableGroups,
       labelKey: 'riskFactor.vulnerableGroups',
+      labelValues: { count: vulnerableCount } as Record<string, number | string>,
     },
     {
       key: 'follow_up' as const,

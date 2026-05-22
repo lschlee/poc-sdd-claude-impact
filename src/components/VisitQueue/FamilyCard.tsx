@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 import type { ScoredFamily } from '@/domain/models';
 
 interface FamilyCardProps {
@@ -56,11 +57,21 @@ export function FamilyCard({ scoredFamily, isSelected, onSelect }: FamilyCardPro
         <ul className="risk-factors">
           {topFactors.map(f => (
             <li key={f.key} data-testid="risk-factor">
-              {t(f.labelKey as Parameters<typeof t>[0])}
+              {t(f.labelKey as Parameters<typeof t>[0], f.labelValues)}
             </li>
           ))}
         </ul>
       )}
+
+      <Link
+        href={`/family/${family.id}`}
+        data-testid={`register-visit-${family.id}`}
+        className="register-visit-link"
+        onClick={e => e.stopPropagation()}
+        onKeyDown={e => e.stopPropagation()}
+      >
+        {t('queue.registerVisit')} →
+      </Link>
     </div>
   );
 }

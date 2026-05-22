@@ -2,8 +2,18 @@
 
 import { useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
 import { useTranslations } from 'next-intl';
 import type { ScoredFamily } from '@/domain/models';
+
+// Fix Leaflet's broken default icon resolution under webpack/Next.js
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+delete (L.Icon.Default.prototype as any)._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconUrl: '/marker-icon.png',
+  iconRetinaUrl: '/marker-icon-2x.png',
+  shadowUrl: '/marker-shadow.png',
+});
 
 interface QueueMapProps {
   families: ScoredFamily[];
@@ -38,8 +48,8 @@ export function QueueMap({ families, selectedId, onSelect }: QueueMapProps) {
         ref={mapRef}
       >
         <TileLayer
-          url="/tiles/{z}/{x}/{y}.png"
-          attribution="© OpenStreetMap contributors"
+          url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           minZoom={14}
           maxZoom={17}
         />
