@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import messages from '@/lib/i18n/messages/pt-BR.json';
 import 'leaflet/dist/leaflet.css';
+import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Prioridade de Visitas',
