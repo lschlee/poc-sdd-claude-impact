@@ -73,7 +73,7 @@ After visiting a family, the CHA opens that family's card and registers the visi
 
 - **FR-001**: The system MUST display, for the signed-in CHA, the list of families flagged for visit today, sorted in descending order of risk score.
 - **FR-002**: The system MUST display the same set of families as pins on a map of the micro-area, with selection synchronized between list and map.
-- **FR-003**: The system MUST compute a risk score for each family that combines, at minimum: (a) time since last visit, (b) presence of chronic conditions among residents, and (c) presence of vulnerable groups (infants, pregnant residents, elderly residents).
+- **FR-003**: The system MUST compute a risk score for each family that combines, at minimum: (a) time since last visit, (b) presence of chronic conditions among residents, (c) presence of vulnerable groups (infants, pregnant residents, elderly residents), and (d) presence of active follow-up flags set on the family during a prior visit registration.
 - **FR-004**: The system MUST surface the top contributing factors of a family's score to the CHA when the family is selected, so the ranking is explainable.
 - **FR-005**: The system MUST allow the CHA to register a completed visit, capturing at least: visit date, the CHA who performed it, and free-text notes. Optional follow-up flags MUST be supported.
 - **FR-006**: After a visit is registered, the system MUST recompute the family's score and re-render the queue (list + map) so the ordering reflects the new score within a few seconds.

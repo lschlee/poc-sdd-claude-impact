@@ -68,22 +68,24 @@ Single Next.js project — `src/` and `tests/` at repository root, `public/` for
 > and only then start the implementation tasks below.**
 > T014 is the required end-to-end test that exercises every layer of the US1 slice (Principle II).
 
-- [ ] T014 [P] [US1] Write failing Playwright E2E test in `tests/e2e/story1-queue.spec.ts`: assert the home page renders a list with families in descending risk score order, the map renders the same count of pins, clicking a list item highlights the matching map pin, and risk factor labels are visible — test must fail before any implementation exists
+- [ ] T014 [P] [US1] Write failing Playwright E2E test in `tests/e2e/story1-queue.spec.ts`: assert the home page renders only families due today (FR-001) in descending risk score order; the map renders matching pins; clicking a list item highlights the corresponding pin; risk factor labels are visible; a family with `coordinates: null` renders a "needs location" marker (FR-002 edge case); and `page.on('request', ...)` intercept confirms zero external network requests during page load and map interaction (FR-012) — test must fail before any implementation exists
 - [ ] T015 [P] [US1] Write failing Jest unit tests for `computeRiskScore` in `tests/unit/scoring.test.ts`: test all 4 factor formulas with known fixture inputs, verify `f_time = 1.0` for never-visited (empty `activeVisits`), verify `f_chronic = 0` and `f_vulnerable = 0` for empty residents, verify `total` stays in `[0, 1]`, verify determinism
 - [ ] T016 [P] [US1] Write failing Jest unit tests for `sortQueue` in `tests/unit/queue.test.ts`: test descending `total` ordering, tie-break on `daysSinceLastVisit DESC`, secondary tie-break on `family.id ASC`, verify returned array is a new object (input not mutated), verify same input always produces same output
 - [ ] T017 [P] [US1] Write failing Jest integration test in `tests/integration/rosterRepository.test.ts`: assert `getFamiliesForCHA("CHA-001")` returns only families whose `microAreaId` matches the CHA's assigned area (FR-008), returned objects are typed `Family[]`, families with `coordinates: null` are included in results
+- [ ] T016a [P] [US1] Write failing Jest unit tests for `filterDueToday` in `tests/unit/queue.test.ts` (extend existing file): assert a family past its recommended visit interval is included; a recently visited family with no active follow-up flags is excluded; a family with an active follow-up flag is included regardless of recency; a never-visited family (no non-undone visits) is always included — test must fail before any implementation exists (FR-001, spec assumption: "today's queue")
 
 ### Implementation for User Story 1
 
 - [ ] T018 [US1] Implement `computeRiskScore` pure function in `src/domain/scoring.ts` with all 4 factor formulas and `DEFAULT_SCORING_CONFIG` export per `contracts/scoring-contract.md`; export `ScoringConfig` type — makes T015 green
 - [ ] T019 [US1] Implement `sortQueue` pure function in `src/domain/queue.ts` sorting `ScoredFamily[]` by `total DESC → daysSinceLastVisit DESC → family.id ASC` per FR-009; returns new array — makes T016 green
+- [ ] T019a [US1] Implement `filterDueToday(families: Family[], visitsByFamily: Map<string, Visit[]>, config: ScoringConfig): Family[]` in `src/domain/queue.ts`: include families where days since most recent non-undone visit ≥ `config.recommendedIntervalDays`, or any active follow-up flag is set, or no non-undone visits exist; add `recommendedIntervalDays: number` to `ScoringConfig` in `src/domain/models.ts` and `DEFAULT_SCORING_CONFIG` in `src/domain/scoring.ts` — makes T016a green
 - [ ] T020 [US1] Implement `RosterRepository` in `src/lib/storage/rosterRepository.ts` wrapping `src/data/roster.ts`: export `getFamiliesForCHA(chaId)` filtering by `microAreaId ∈ cha.microAreaIds`, `getMicroArea()`, and `getCHA()` — makes T017 green
-- [ ] T021 [US1] Implement `useVisitQueue` React hook in `src/lib/hooks/useVisitQueue.ts`: calls `RosterRepository.getFamiliesForCHA`, calls `computeRiskScore` per family (passing `today` and empty `activeVisits` for US1 scope), calls `sortQueue`, exposes `{ families: ScoredFamily[], selectedId: string | null, select(id) }`
+- [ ] T021 [US1] Implement `useVisitQueue` React hook in `src/lib/hooks/useVisitQueue.ts`: calls `RosterRepository.getFamiliesForCHA`, calls `filterDueToday` to select only families due for a visit today (FR-001), calls `computeRiskScore` per filtered family (passing `today` and empty `activeVisits` for US1 scope), calls `sortQueue`, exposes `{ families: ScoredFamily[], selectedId: string | null, select(id) }`
 - [ ] T022 [US1] Implement `FamilyCard` component in `src/components/VisitQueue/FamilyCard.tsx`: display family name, numeric risk score badge, top 2–3 `RiskFactor` label keys via `useTranslations`, "needs location" indicator when `coordinates === null`, highlight style when `isSelected` prop is true (FR-004)
 - [ ] T023 [P] [US1] Implement `QueueList` component in `src/components/VisitQueue/QueueList.tsx`: renders ranked `FamilyCard` list from `ScoredFamily[]` prop, calls `onSelect(id)` on tap, applies selection highlight (FR-001)
-- [ ] T024 [P] [US1] Implement `QueueMap` component in `src/components/VisitQueue/QueueMap.tsx` using `dynamic(() => import, { ssr: false })`: `<MapContainer>` + `<TileLayer url="/tiles/{z}/{x}/{y}.png" minZoom={14} maxZoom={17}>` + one `<Marker>` per family with `<Popup>`, opens popup for selected family, emits `onSelect(id)` on marker click; renders "needs location" differently for `coordinates === null` (FR-002, FR-018)
+- [ ] T024 [P] [US1] Implement `QueueMap` component in `src/components/VisitQueue/QueueMap.tsx` (imported by its parent via `dynamic(() => import('./QueueMap'), { ssr: false })` to skip SSR — do not use `dynamic()` inside this file itself): `<MapContainer>` + `<TileLayer url="/tiles/{z}/{x}/{y}.png" minZoom={14} maxZoom={17}>` + one `<Marker>` per family with `<Popup>`, opens popup for selected family, emits `onSelect(id)` on marker click; renders "needs location" differently for `coordinates === null` (FR-002, FR-018)
 - [ ] T025 [US1] Wire `src/app/page.tsx` to render `<QueueList>` and `<QueueMap>` side by side using `useVisitQueue` hook for shared selection state; mobile-first layout (stack vertically on narrow viewport) with all strings via `useTranslations` (FR-001, FR-002, FR-017)
-- [ ] T026 [US1] Run `pnpm test:e2e -- story1-queue` against dev server and iterate until all assertions in `tests/e2e/story1-queue.spec.ts` pass; confirm queue is visible within 5 s on a throttled CPU profile (SC-001)
+- [ ] T026 [US1] Run `pnpm test:e2e -- story1-queue` against dev server and iterate until all assertions in `tests/e2e/story1-queue.spec.ts` pass; add a Playwright timing assertion that queue visibility occurs within 5 000 ms using `performance.now()` or Playwright `clock` (automated SC-001 check)
 
 **Checkpoint**: User Story 1 is fully functional and independently demonstrable — read-only priority queue.
 
@@ -100,7 +102,7 @@ Single Next.js project — `src/` and `tests/` at repository root, `public/` for
 > Write these tests FIRST, observe failure, then implement.
 > T027 is the required end-to-end test that exercises every layer of the US2 slice (Principle II).
 
-- [ ] T027 [P] [US2] Write failing Playwright E2E test in `tests/e2e/story2-visit.spec.ts`: from the home queue, tap the top family, fill and submit the visit form, assert the queue reorders with the next family at top, assert the registered family's detail page shows the new visit in history, then tap undo and assert queue restores — test must fail before any implementation exists
+- [ ] T027 [P] [US2] Write failing Playwright E2E test in `tests/e2e/story2-visit.spec.ts`: from the home queue, tap the top family, fill and submit the visit form, assert the queue reorders with the next family at top, assert the registered family's detail page shows the new visit in history, tap undo and assert queue restores; also assert that entering a future date in the visit form shows a pt-BR validation error and blocks submission (FR-005, data-model.md validation rule) — test must fail before any implementation exists
 - [ ] T028 [P] [US2] Write failing Jest integration test in `tests/integration/visitRepository.test.ts` using `fake-indexeddb`: `saveVisit` writes a `VisitRecord` and a matching `AuditEntry` in the same transaction; `getActiveVisitsForFamily` excludes records with `undone === true`; `undoVisit` sets `undone = true` and appends an `'undo'` audit entry atomically — test must fail before implementation
 
 ### Implementation for User Story 2
@@ -110,7 +112,7 @@ Single Next.js project — `src/` and `tests/` at repository root, `public/` for
 - [ ] T031 [US2] Implement `VisitForm` component in `src/components/VisitForm/VisitForm.tsx`: date input defaulting to today with `≤ today` validation (data-model.md validation rule), free-text notes textarea, follow-up flag checkboxes with pt-BR labels, submit and cancel buttons; all strings via `useTranslations` (FR-005, FR-017)
 - [ ] T032 [US2] Implement `FamilyDetailPage` at `src/app/family/[id]/page.tsx`: display family name, residents summary, ordered visit history from `VisitRepository.getVisitHistoryForFamily`, embedded `<VisitForm>` for registering a new visit, undo button that calls `VisitService.undoVisit` for the latest active visit (FR-005, FR-007, FR-013, FR-014)
 - [ ] T033 [US2] Update `useVisitQueue` hook in `src/lib/hooks/useVisitQueue.ts` to load `activeVisits` from `VisitRepository` per family and pass them to `computeRiskScore`; expose a `refresh()` callback; ensure re-render after `VisitService.registerVisit` and `VisitService.undoVisit` completes within 3 s (SC-003)
-- [ ] T034 [US2] Run `pnpm test:e2e -- story2-visit` against dev server and iterate until all assertions in `tests/e2e/story2-visit.spec.ts` pass; confirm queue re-renders within 3 s (SC-003) and the full registration flow completes within 30 s (SC-002)
+- [ ] T034 [US2] Run `pnpm test:e2e -- story2-visit` against dev server and iterate until all assertions in `tests/e2e/story2-visit.spec.ts` pass; add Playwright timing assertions: queue re-renders within 3 000 ms after visit submit (SC-003) and full registration flow completes within 30 000 ms (SC-002), both using `performance.now()` or Playwright timing
 
 **Checkpoint**: User Stories 1 and 2 both work independently — live priority queue with visit registration and undo.
 
@@ -120,9 +122,8 @@ Single Next.js project — `src/` and `tests/` at repository root, `public/` for
 
 **Purpose**: Edge cases, type safety, build validation, and developer workflow verification.
 
-- [ ] T035 [P] Handle the never-visited family edge case in `src/components/VisitQueue/FamilyCard.tsx`: display a pt-BR "nunca visitada" label when `lastVisitDate === null` instead of a negative days value (spec edge cases)
-- [ ] T036 [P] Handle families with `coordinates === null` in `src/components/VisitQueue/QueueMap.tsx`: render a distinct "needs location" marker (different icon/color) rather than skipping or placing at `[0, 0]` (FR-002 edge case)
-- [ ] T037 [P] Enforce `visitDate ≤ today` constraint in `src/components/VisitForm/VisitForm.tsx` with an inline pt-BR validation error message; prevent form submission when the date is in the future (data-model.md validation rules)
+- [ ] T035a [P] Write failing Jest/RTL unit test in `tests/unit/familyCard.test.ts`: render `<FamilyCard>` with `lastVisitDate: null` and assert the pt-BR "nunca visitada" label is present; render with a non-null date and assert the label is absent — test must fail before T035 exists (constitution Principle I)
+- [ ] T035 Handle the never-visited family edge case in `src/components/VisitQueue/FamilyCard.tsx`: display a pt-BR "nunca visitada" label when `lastVisitDate === null` instead of a negative days value (spec edge cases) — makes T035a green
 - [ ] T038 [P] Run `pnpm type-check` (`tsc --noEmit`) and fix all TypeScript type errors across `src/` and `tests/`
 - [ ] T039 [P] Run `pnpm lint` and fix all ESLint warnings and errors across `src/`
 - [ ] T040 Run `pnpm build` to verify Next.js static export produces a valid `out/` directory; confirm no server-side import leaks (Leaflet window access, dynamic imports) break the build
@@ -156,7 +157,7 @@ Single Next.js project — `src/` and `tests/` at repository root, `public/` for
 
 - All Setup tasks marked [P] can run in parallel within Phase 1
 - All Foundational tasks marked [P] can run in parallel within Phase 2 (T010, T011 are independent of T012; T013 depends on T011)
-- Within US1: T014–T017 (all tests) can be written in parallel; T018–T019 can run in parallel; T023–T024 (QueueList and QueueMap) can run in parallel
+- Within US1: T014–T017 + T016a (all tests) can be written in parallel; T018, T019, T019a (scoring.ts, queue.ts sort + filterDueToday — no shared state) can run in parallel; T023–T024 (QueueList and QueueMap) can run in parallel
 - Within US2: T027–T028 (tests) can be written in parallel
 - All Polish tasks marked [P] can run in parallel
 
@@ -167,19 +168,21 @@ Single Next.js project — `src/` and `tests/` at repository root, `public/` for
 ### User Story 1 — Write all tests concurrently
 
 ```bash
-# All four US1 test files can be authored in parallel:
-Task T014: tests/e2e/story1-queue.spec.ts        (Playwright E2E)
-Task T015: tests/unit/scoring.test.ts             (Jest unit)
-Task T016: tests/unit/queue.test.ts               (Jest unit)
-Task T017: tests/integration/rosterRepository.test.ts  (Jest integration)
+# All five US1 test files can be authored in parallel:
+Task T014:  tests/e2e/story1-queue.spec.ts              (Playwright E2E)
+Task T015:  tests/unit/scoring.test.ts                  (Jest unit)
+Task T016:  tests/unit/queue.test.ts                    (Jest unit — sortQueue)
+Task T016a: tests/unit/queue.test.ts (extended)         (Jest unit — filterDueToday)
+Task T017:  tests/integration/rosterRepository.test.ts  (Jest integration)
 ```
 
 ### User Story 1 — Implement domain layer concurrently (after tests written)
 
 ```bash
-# scoring.ts and queue.ts have no shared state — implement together:
-Task T018: src/domain/scoring.ts   (make T015 green)
-Task T019: src/domain/queue.ts     (make T016 green)
+# scoring.ts and queue.ts functions have no shared state — implement together:
+Task T018:  src/domain/scoring.ts  (make T015 green)
+Task T019:  src/domain/queue.ts    (make T016 green — sortQueue)
+Task T019a: src/domain/queue.ts    (make T016a green — filterDueToday)
 ```
 
 ### User Story 1 — Implement UI components concurrently (after domain + storage green)

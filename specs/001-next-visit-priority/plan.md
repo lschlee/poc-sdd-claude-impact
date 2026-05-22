@@ -115,6 +115,10 @@ src/
 │   ├── scoring.ts                  # Pure risk scoring engine
 │   └── queue.ts                    # Queue sort + deterministic tie-break (FR-009)
 ├── lib/
+│   ├── hooks/
+│   │   └── useVisitQueue.ts        # Queue state hook (US1 + US2)
+│   ├── services/
+│   │   └── visitService.ts         # Visit registration + undo orchestration (US2)
 │   ├── storage/
 │   │   ├── db.ts                   # idb schema definition + openDB()
 │   │   ├── visitRepository.ts      # CRUD for visit records + undo support
