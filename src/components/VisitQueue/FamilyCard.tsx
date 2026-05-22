@@ -21,6 +21,7 @@ export function FamilyCard({ scoredFamily, isSelected, onSelect }: FamilyCardPro
   return (
     <div
       data-testid="family-card"
+      data-family-id={family.id}
       className={`family-card${isSelected ? ' selected' : ''}`}
       onClick={() => onSelect(family.id)}
       role="button"
