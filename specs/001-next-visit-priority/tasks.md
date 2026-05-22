@@ -127,7 +127,7 @@ Single Next.js project — `src/` and `tests/` at repository root, `public/` for
 - [X] T038 [P] Run `pnpm type-check` (`tsc --noEmit`) and fix all TypeScript type errors across `src/` and `tests/`
 - [X] T039 [P] Run `pnpm lint` and fix all ESLint warnings and errors across `src/`
 - [X] T040 Run `pnpm build` to verify Next.js static export produces a valid `out/` directory; confirm no server-side import leaks (Leaflet window access, dynamic imports) break the build
-- [ ] T041 Validate the full quickstart.md developer workflow end-to-end: `pnpm install` → `pnpm dev` → `pnpm test` (all green) → `pnpm test:e2e` (all green) → `pnpm build`; fix any deviation from the documented flow
+- [X] T041 Validate the full quickstart.md developer workflow end-to-end: `pnpm install` → `pnpm dev` → `pnpm test` (all green) → `pnpm test:e2e` (all green) → `pnpm build`; fix any deviation from the documented flow
 
 ---
 
